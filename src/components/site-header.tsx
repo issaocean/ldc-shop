@@ -37,13 +37,15 @@ export async function SiteHeader() {
 
     return (
         <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
-            <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-                <div className="flex gap-6 md:gap-10">
+            <div className="container flex h-16 items-center gap-3">
+                <div className="flex items-center gap-4 md:gap-8 min-w-0">
                     <HeaderLogo adminName={firstAdminName} shopNameOverride={shopNameOverride} />
                     <HeaderNav isAdmin={isAdmin} />
                 </div>
-                <HeaderSearch />
-                <div className="flex flex-1 items-center justify-end space-x-4">
+                <div className="hidden md:flex flex-1 justify-center px-4">
+                    <HeaderSearch className="max-w-[460px]" />
+                </div>
+                <div className="flex items-center justify-end gap-2 md:gap-3">
                     <nav className="flex items-center space-x-2">
                         <LanguageSwitcher />
                         {user ? (
