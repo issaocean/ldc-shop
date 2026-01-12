@@ -253,7 +253,7 @@ export function HomeContent({ products, announcement, visitorCount, categories: 
                                 style={{ animationDelay: `${index * 50}ms` }}
                             >
                                 {/* Image Section with aspect ratio tweak */}
-                                <div className="aspect-[16/10] bg-gradient-to-br from-muted/30 to-muted/10 relative overflow-hidden">
+                                <Link href={`/buy/${product.id}`} className="block aspect-[16/10] bg-gradient-to-br from-muted/30 to-muted/10 relative overflow-hidden group-hover:opacity-90">
                                     <img
                                         src={product.image || `https://api.dicebear.com/7.x/shapes/svg?seed=${product.id}`}
                                         alt={product.name}
@@ -266,14 +266,16 @@ export function HomeContent({ products, announcement, visitorCount, categories: 
                                             {product.category}
                                         </Badge>
                                     )}
-                                </div>
+                                </Link>
 
                                 {/* Content Section */}
                                 <CardContent className="flex-1 p-4">
                                     <div className="flex items-start justify-between gap-2 mb-1.5">
-                                        <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300 leading-snug line-clamp-1" title={product.name}>
-                                            {product.name}
-                                        </h3>
+                                        <Link href={`/buy/${product.id}`} className="block">
+                                            <h3 className="font-semibold text-base group-hover:text-primary transition-colors duration-300 leading-snug line-clamp-1" title={product.name}>
+                                                {product.name}
+                                            </h3>
+                                        </Link>
                                     </div>
 
                                     {product.isHot && (
@@ -316,18 +318,34 @@ export function HomeContent({ products, announcement, visitorCount, categories: 
                                         )}
                                     </div>
 
-                                    <Link href={`/buy/${product.id}`}>
-                                        <Button
-                                            size="sm"
-                                            className={cn(
-                                                "h-8 px-4 text-xs font-medium rounded-full shadow-sm hover:shadow-md transition-all active:scale-95",
-                                                product.stockCount > 0 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted"
-                                            )}
-                                            disabled={product.stockCount <= 0}
-                                        >
-                                            {product.stockCount > 0 ? t('common.buy') : t('common.outOfStock')}
-                                        </Button>
-                                    </Link>
+                                    <div className="flex items-center gap-2">
+                                        <Link href={`/buy/${product.id}`}>
+                                            <Button
+                                                size="sm"
+                                                variant="secondary"
+                                                className="h-8 w-8 p-0 rounded-full shadow-sm hover:shadow-md transition-all bg-muted text-muted-foreground hover:bg-muted/80"
+                                                title={t('common.viewDetails')}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
+                                                <span className="sr-only">{t('common.viewDetails')}</span>
+                                            </Button>
+                                        </Link>
+                                        <Link href={`/buy/${product.id}`}>
+                                            <Button
+                                                size="sm"
+                                                className={cn(
+                                                    "h-8 px-4 text-xs font-medium rounded-full shadow-sm hover:shadow-md transition-all active:scale-95",
+                                                    product.stockCount > 0 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted"
+                                                )}
+                                                disabled={product.stockCount <= 0}
+                                            >
+                                                {product.stockCount > 0 ? t('common.buy') : t('common.outOfStock')}
+                                            </Button>
+                                        </Link>
+                                    </div>
                                 </CardFooter>
                             </Card>
                         ))}
