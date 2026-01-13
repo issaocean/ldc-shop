@@ -9,6 +9,13 @@
         "directory": ".open-next/assets",
         "binding": "ASSETS"
     },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "ldc-shop",
+            "database_id": "ece1de03-d615-49e6-aaae-f511f95972eb"
+        }
+    ],
     "observability": {
         "enabled": true
     }
